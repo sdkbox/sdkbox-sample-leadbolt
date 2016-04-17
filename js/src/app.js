@@ -31,22 +31,39 @@ var HelloWorldLayer = cc.Layer.extend({
     },
 
     createTestMenu:function() {
-        var menu = new cc.Menu();
+        sdkbox.PluginLeadBolt.init();
+        sdkbox.PluginLeadBolt.setListener({
+            onModuleLoaded: function(placement) {
+                cc.log("onModuleLoaded: " + placement);
+            },
+            onModuleClosed: function(placement) {
+                cc.log("onModuleClosed: " + placement);
+            },
+            onModuleClicked: function(placement) {
+                cc.log("onModuleClicked: " + placement);
+            },
+            onModuleCached: function(placement) {
+                cc.log("onModuleCached: " + placement);
+            },
+            onModuleFailed: function(placement, error, cached) {
+                cc.log("onModuleFailed: " + placement + ", error: " + error + ", cached: " + (cached ? "YES" : "NO"));
+            },
+            onMediaFinished: function(viewCompleted) {
+                cc.log("onMediaFinished: " + placement);
+            }
+        })
+        sdkbox.PluginLeadBolt.loadModuleToCache("inapp");
 
-        var item1 = new cc.MenuItemLabel(new cc.LabelTTF("Test Item 1", "sans", 28), function() {
-            cc.log("Test Item 1");
+        var menu = new cc.Menu();
+        var item1 = new cc.MenuItemLabel(new cc.LabelTTF("show ad", "sans", 28), function() {
+            cc.log("show ad");
+            if (sdkbox.PluginLeadBolt.isAdReady("inapp")) {
+                sdkbox.PluginLeadBolt.loadModule("inapp");
+            } else {
+                cc.log("leadbolt ad is not ready");
+            }
         });
         menu.addChild(item1);
-
-        var item2 = new cc.MenuItemLabel(new cc.LabelTTF("Test Item 2", "sans", 28), function() {
-            cc.log("Test Item 2");
-        });
-        menu.addChild(item2);
-
-        var item3 = new cc.MenuItemLabel(new cc.LabelTTF("Test Item 3", "sans", 28), function() {
-            cc.log("Test Item 3");
-        });
-        menu.addChild(item3);
 
         var winsize = cc.winSize;
         menu.x = winsize.width / 2;

@@ -65,7 +65,11 @@ void HelloWorld::createTestMenu()
 
     menu->addChild(MenuItemLabel::create(Label::createWithSystemFont("show ad", "sans", 24), [](Ref*){
         CCLOG("show ad");
-        sdkbox::PluginLeadBolt::loadModule("inapp");
+        if (sdkbox::PluginLeadBolt::isAdReady("inapp")) {
+            sdkbox::PluginLeadBolt::loadModule("inapp");
+        } else {
+            CCLOG("leadbolt ad is not ready");
+        }
     }));
 
     menu->alignItemsVerticallyWithPadding(10);
