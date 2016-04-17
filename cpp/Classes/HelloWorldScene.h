@@ -2,8 +2,9 @@
 #define __HELLOWORLD_SCENE_H__
 
 #include "cocos2d.h"
+#include "PluginLeadBolt/PluginLeadBolt.h"
 
-class HelloWorld : public cocos2d::Layer
+class HelloWorld : public cocos2d::Layer, public sdkbox::LeadBoltListener
 {
 public:
     // there's no 'id' in cpp, so we recommend returning the class instance pointer
@@ -18,6 +19,12 @@ public:
 private:
     void createTestMenu();
 
+    void onModuleLoaded(const std::string& placement);
+    void onModuleClosed(const std::string& placement);
+    void onModuleClicked(const std::string& placement);
+    void onModuleCached(const std::string& placement);
+    void onModuleFailed(const std::string& placement, const std::string& error, bool iscached);
+    void onMediaFinished(bool viewCompleted);
 };
 
 #endif // __HELLOWORLD_SCENE_H__

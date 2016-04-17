@@ -1,5 +1,6 @@
 
 #include "HelloWorldScene.h"
+#include "PluginLeadBolt/PluginLeadBolt.h"
 
 USING_NS_CC;
 
@@ -56,21 +57,49 @@ bool HelloWorld::init()
 
 void HelloWorld::createTestMenu()
 {
+    sdkbox::PluginLeadBolt::setListener(this);
+
+    sdkbox::PluginLeadBolt::loadModuleToCache("inapp");
+    
     auto menu = Menu::create();
 
-    menu->addChild(MenuItemLabel::create(Label::createWithSystemFont("Test Item 1", "sans", 24), [](Ref*){
-        CCLOG("Test Item 1");
-    }));
-
-    menu->addChild(MenuItemLabel::create(Label::createWithSystemFont("Test Item 2", "sans", 24), [](Ref*){
-        CCLOG("Test Item 2");
-    }));
-
-    menu->addChild(MenuItemLabel::create(Label::createWithSystemFont("Test Item 3", "sans", 24), [](Ref*){
-        CCLOG("Test Item 3");
+    menu->addChild(MenuItemLabel::create(Label::createWithSystemFont("show ad", "sans", 24), [](Ref*){
+        CCLOG("show ad");
+        sdkbox::PluginLeadBolt::loadModule("inapp");
     }));
 
     menu->alignItemsVerticallyWithPadding(10);
     addChild(menu);
+}
+
+
+void HelloWorld::onModuleLoaded(const std::string& placement)
+{
+    CCLOG("onModuleLoaded: %s", placement.c_str());
+}
+
+void HelloWorld::onModuleClosed(const std::string& placement)
+{
+    CCLOG("onModuleClosed: %s", placement.c_str());
+}
+
+void HelloWorld::onModuleClicked(const std::string& placement)
+{
+    CCLOG("onModuleClicked: %s", placement.c_str());
+}
+
+void HelloWorld::onModuleCached(const std::string& placement)
+{
+    CCLOG("onModuleCached: %s", placement.c_str());
+}
+
+void HelloWorld::onModuleFailed(const std::string& placement, const std::string& error, bool iscached)
+{
+    CCLOG("onModuleFailed: %s, err: %s, iscached: %s", placement.c_str(), error.c_str(), iscached ? "YES" : "NO");
+}
+
+void HelloWorld::onMediaFinished(bool viewCompleted)
+{
+    CCLOG("onMediaFinished: %s", viewCompleted ? "YES" : "NO");
 }
 
