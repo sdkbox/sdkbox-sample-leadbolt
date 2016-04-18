@@ -52,10 +52,15 @@ var HelloWorldLayer = cc.Layer.extend({
                 cc.log("onMediaFinished: " + placement);
             }
         })
-        sdkbox.PluginLeadBolt.loadModuleToCache("inapp");
 
         var menu = new cc.Menu();
-        var item1 = new cc.MenuItemLabel(new cc.LabelTTF("show ad", "sans", 28), function() {
+        var item1 = new cc.MenuItemLabel(new cc.LabelTTF("cache ad", "sans", 28), function() {
+            cc.log("cache ad");
+            sdkbox.PluginLeadBolt.loadModuleToCache("inapp");
+        });
+        menu.addChild(item1);
+
+        var item2 = new cc.MenuItemLabel(new cc.LabelTTF("show ad", "sans", 28), function() {
             cc.log("show ad");
             if (sdkbox.PluginLeadBolt.isAdReady("inapp")) {
                 sdkbox.PluginLeadBolt.loadModule("inapp");
@@ -63,7 +68,7 @@ var HelloWorldLayer = cc.Layer.extend({
                 cc.log("leadbolt ad is not ready");
             }
         });
-        menu.addChild(item1);
+        menu.addChild(item2);
 
         var winsize = cc.winSize;
         menu.x = winsize.width / 2;

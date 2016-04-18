@@ -23,13 +23,19 @@ function MainScene:setupTestMenu()
         dump(args)
     end)
 
-    sdkbox.PluginLeadBolt:loadModuleToCache("inapp")
-
     local menu = cc.Menu:create()
 
-    local label1 = cc.Label:createWithSystemFont("show ad", "sans", 28)
+    local label1 = cc.Label:createWithSystemFont("cache ad", "sans", 28)
     local item1 = cc.MenuItemLabel:create(label1)
     item1:onClicked(function()
+        print("cache ad")
+        sdkbox.PluginLeadBolt:loadModuleToCache("inapp")
+    end)
+    menu:addChild(item1)
+
+    local label2 = cc.Label:createWithSystemFont("show ad", "sans", 28)
+    local item2 = cc.MenuItemLabel:create(label2)
+    item2:onClicked(function()
         print("show ad")
         if sdkbox.PluginLeadBolt:isAdReady('inapp') then
             sdkbox.PluginLeadBolt:loadModule('inapp')
@@ -37,7 +43,7 @@ function MainScene:setupTestMenu()
             print('leadbolt ad is not ready')
         end
     end)
-    menu:addChild(item1)
+    menu:addChild(item2)
 
     menu:alignItemsVerticallyWithPadding(24)
     self:addChild(menu)

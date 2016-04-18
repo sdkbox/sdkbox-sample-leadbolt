@@ -59,9 +59,12 @@ void HelloWorld::createTestMenu()
 {
     sdkbox::PluginLeadBolt::setListener(this);
 
-    sdkbox::PluginLeadBolt::loadModuleToCache("inapp");
-    
     auto menu = Menu::create();
+
+    menu->addChild(MenuItemLabel::create(Label::createWithSystemFont("cache ad", "sans", 24), [](Ref*){
+        CCLOG("cache ad");
+        sdkbox::PluginLeadBolt::loadModuleToCache("inapp");
+    }));
 
     menu->addChild(MenuItemLabel::create(Label::createWithSystemFont("show ad", "sans", 24), [](Ref*){
         CCLOG("show ad");
