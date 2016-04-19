@@ -56,14 +56,14 @@ var HelloWorldLayer = cc.Layer.extend({
         var menu = new cc.Menu();
         var item1 = new cc.MenuItemLabel(new cc.LabelTTF("cache ad", "sans", 28), function() {
             cc.log("cache ad");
-            sdkbox.PluginLeadBolt.loadModuleToCache("inapp");
+            sdkbox.PluginLeadBolt.loadModuleToCache("ad1");
         });
         menu.addChild(item1);
 
         var item2 = new cc.MenuItemLabel(new cc.LabelTTF("show ad", "sans", 28), function() {
             cc.log("show ad");
-            if (sdkbox.PluginLeadBolt.isAdReady("inapp")) {
-                sdkbox.PluginLeadBolt.loadModule("inapp");
+            if (sdkbox.PluginLeadBolt.isAdReady("ad1")) {
+                sdkbox.PluginLeadBolt.loadModule("ad1");
             } else {
                 cc.log("leadbolt ad is not ready");
             }

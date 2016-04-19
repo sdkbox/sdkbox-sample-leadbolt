@@ -63,13 +63,13 @@ void HelloWorld::createTestMenu()
 
     menu->addChild(MenuItemLabel::create(Label::createWithSystemFont("cache ad", "sans", 24), [](Ref*){
         CCLOG("cache ad");
-        sdkbox::PluginLeadBolt::loadModuleToCache("inapp");
+        sdkbox::PluginLeadBolt::loadModuleToCache("ad1");
     }));
 
     menu->addChild(MenuItemLabel::create(Label::createWithSystemFont("show ad", "sans", 24), [](Ref*){
         CCLOG("show ad");
-        if (sdkbox::PluginLeadBolt::isAdReady("inapp")) {
-            sdkbox::PluginLeadBolt::loadModule("inapp");
+        if (sdkbox::PluginLeadBolt::isAdReady("ad1")) {
+            sdkbox::PluginLeadBolt::loadModule("ad1");
         } else {
             CCLOG("leadbolt ad is not ready");
         }

@@ -29,7 +29,7 @@ function MainScene:setupTestMenu()
     local item1 = cc.MenuItemLabel:create(label1)
     item1:onClicked(function()
         print("cache ad")
-        sdkbox.PluginLeadBolt:loadModuleToCache("inapp")
+        sdkbox.PluginLeadBolt:loadModuleToCache("ad1")
     end)
     menu:addChild(item1)
 
@@ -37,8 +37,8 @@ function MainScene:setupTestMenu()
     local item2 = cc.MenuItemLabel:create(label2)
     item2:onClicked(function()
         print("show ad")
-        if sdkbox.PluginLeadBolt:isAdReady('inapp') then
-            sdkbox.PluginLeadBolt:loadModule('inapp')
+        if sdkbox.PluginLeadBolt:isAdReady("ad1") then
+            sdkbox.PluginLeadBolt:loadModule("ad1")
         else
             print('leadbolt ad is not ready')
         end
